@@ -1,0 +1,28 @@
+<h2>Show Item</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @item.name %>
+  </li>
+
+  <li>
+    <strong>Repeat:</strong>
+    <%= @item.repeat %>
+  </li>
+
+  <li>
+    <strong>Price:</strong>
+    <%= @item.price %>
+  </li>
+
+  <li>
+    <strong>Item type:</strong>
+    <%= @item.item_type %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: item_path(@conn, :edit, @item) %></span>
+<span><%= link "Back", to: item_path(@conn, :index) %></span>
