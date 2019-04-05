@@ -19,6 +19,7 @@ defmodule ShoppingAppWeb.Router do
 
     get("/", PageController, :index)
     resources("/users", UserController)
+    resources("/lists", ListController)
   end
 
   # Other scopes may use custom stacks.
