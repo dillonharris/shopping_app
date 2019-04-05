@@ -6,8 +6,12 @@ defmodule ShoppingApp.AccountsTest do
   describe "users" do
     alias ShoppingApp.Accounts.User
 
-    @valid_attrs %{email: "some email", is_active: true, password: "some password"}
-    @update_attrs %{email: "some updated email", is_active: false, password: "some updated password"}
+    @valid_attrs %{email: "email@example.com", is_active: true, password: "some password"}
+    @update_attrs %{
+      email: "email@example.com",
+      is_active: false,
+      password: "some updated password"
+    }
     @invalid_attrs %{email: nil, is_active: nil, password: nil}
 
     def user_fixture(attrs \\ %{}) do
@@ -31,7 +35,7 @@ defmodule ShoppingApp.AccountsTest do
 
     test "create_user/1 with valid data creates a user" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
-      assert user.email == "some email"
+      assert user.email == "email@example.com"
       assert user.is_active == true
       assert user.password == "some password"
     end
@@ -44,7 +48,7 @@ defmodule ShoppingApp.AccountsTest do
       user = user_fixture()
       assert {:ok, user} = Accounts.update_user(user, @update_attrs)
       assert %User{} = user
-      assert user.email == "some updated email"
+      assert user.email == "email@example.com"
       assert user.is_active == false
       assert user.password == "some updated password"
     end
