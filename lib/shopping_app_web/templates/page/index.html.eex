@@ -13,6 +13,9 @@
       <li>
         <%= link "Shopping Lists", to: list_path(@conn, :index) %>
       </li>
+      <li>
+        <%= link "Shopping lists items", to: item_path(@conn, :index) %>
+      </li>
     </ul>
   </div>
 </div>

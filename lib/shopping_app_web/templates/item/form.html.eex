@@ -13,7 +13,7 @@
 
   <div class="form-group">
     <%= label f, :repeat, class: "control-label" %>
-    <%= checkbox f, :repeat, class: "checkbox" %>
+    <%= select f, :repeat, ["Weekly": "weekly", "Monthly": "monthly", "Fortnightly": "fortnightly", "Never": "never"], class: "checkbox" %>
     <%= error_tag f, :repeat %>
   </div>
 
@@ -25,8 +25,20 @@
 
   <div class="form-group">
     <%= label f, :item_type, class: "control-label" %>
-    <%= text_input f, :item_type, class: "form-control" %>
+    <%= select f, :item_type, ["Beverage": "beverage", "Food": "food"], class: "form-control" %>
     <%= error_tag f, :item_type %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :list_id, class: "control-label" %>
+    <%= select f, :list_id, ["List one": 1, "List 2": 2], class: "form-control" %>
+    <%= error_tag f, :list_id %>
+  </div>
+
+   <div class="form-group">
+    <%= label f, :user_id, class: "control-label" %>
+    <%= select f, :user_id, collection_of_users, class: "form-control" %>
+    <%= error_tag f, :user_id %>
   </div>
 
   <div class="form-group">

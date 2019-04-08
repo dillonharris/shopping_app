@@ -2,9 +2,13 @@ defmodule ShoppingApp.Shopping.List do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias ShoppingApp.Shopping.Item
+
   schema "lists" do
     field(:name, :string)
     field(:user_id, :id)
+
+    has_many(:items, Item)
 
     timestamps()
   end

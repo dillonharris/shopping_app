@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>User Id</th>
+      <th>User</th>
 
       <th></th>
     </tr>
@@ -13,7 +13,7 @@
 <%= for list <- @lists do %>
     <tr>
       <td><%= list.name %></td>
-      <td><%= list.user_id %></td>
+      <td><%= set_user_name(list.user_id) %></td>
 
       <td class="text-right">
         <span><%= link "Show", to: list_path(@conn, :show, list), class: "btn btn-default btn-xs" %></span>

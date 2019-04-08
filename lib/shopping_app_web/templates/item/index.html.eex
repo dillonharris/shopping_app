@@ -7,6 +7,8 @@
       <th>Repeat</th>
       <th>Price</th>
       <th>Item type</th>
+      <th>List</th>
+      <th>User</th>
 
       <th></th>
     </tr>
@@ -16,8 +18,10 @@
     <tr>
       <td><%= item.name %></td>
       <td><%= item.repeat %></td>
-      <td><%= item.price %></td>
+      <td><%= number_to_rands(item.price) %></td>
       <td><%= item.item_type %></td>
+      <td><%= set_list_name(item.list_id) %></td>
+      <td><%= set_user_name(item.user_id) %></td>
 
       <td class="text-right">
         <span><%= link "Show", to: item_path(@conn, :show, item), class: "btn btn-default btn-xs" %></span>
