@@ -21,6 +21,16 @@ defmodule ShoppingApp.Shopping do
     Repo.all(List)
   end
 
+  # movie = Repo.preload(movie, [:distributor, :characters, :actors])
+
+  # Repo.all(
+  #   from(list in List,
+  #     join: user in assoc(list, :actors),
+  #     where: user.id == list.user_id,
+  #     preload: [users: user]
+  #   )
+  # )
+
   @doc """
   Gets a single list.
 

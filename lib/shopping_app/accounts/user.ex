@@ -8,7 +8,8 @@ defmodule ShoppingApp.Accounts.User do
   schema "users" do
     field(:email, :string)
     field(:is_active, :boolean, default: false)
-    field(:password, :string)
+    field(:password, :string, virtual: true)
+    field(:password_hash, :string)
     field(:name, :string)
 
     has_many(:lists, List)
@@ -18,11 +19,23 @@ defmodule ShoppingApp.Accounts.User do
   end
 
   @doc false
-  def changeset(user, attrs) do
+  def changeset(user, attrs \\ %{}) do
     user
     |> cast(attrs, [:email, :password, :is_active, :name])
     |> validate_required([:email, :password, :is_active])
     |> validate_format(:email, ~r/.+@.+\..+/, message: "Please input a valid email")
     |> unique_constraint(:email)
+    |> validate_length(:password, min: 6)
+    |> put_password_hash()
+  end
+
+  defp put_password_hash(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{password: password}} ->
+        put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(password))
+
+      _ ->
+        changeset
+    end
   end
 end

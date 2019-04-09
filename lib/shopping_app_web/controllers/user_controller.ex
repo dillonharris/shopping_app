@@ -1,3 +1,5 @@
+require IEx
+
 defmodule ShoppingAppWeb.UserController do
   use ShoppingAppWeb, :controller
 
@@ -6,7 +8,8 @@ defmodule ShoppingAppWeb.UserController do
 
   def index(conn, _params) do
     users = Accounts.list_users()
-    render(conn, "index.html", users: users)
+    current_user = Guardian.Plug.current_resource(conn)
+    render(conn, "index.html", users: users, current_user: current_user)
   end
 
   def new(conn, _params) do
@@ -28,13 +31,15 @@ defmodule ShoppingAppWeb.UserController do
 
   def show(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
-    render(conn, "show.html", user: user)
+    current_user = Guardian.Plug.current_resource(conn)
+    render(conn, "show.html", user: user, current_user: current_user)
   end
 
   def edit(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
     changeset = Accounts.change_user(user)
-    render(conn, "edit.html", user: user, changeset: changeset)
+    current_user = Guardian.Plug.current_resource(conn)
+    render(conn, "edit.html", user: user, changeset: changeset, current_user: current_user)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do

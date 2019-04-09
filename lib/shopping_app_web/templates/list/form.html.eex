@@ -13,7 +13,7 @@
 
   <div class="form-group">
     <%= label f, :user_id, class: "control-label" %>
-    <%= select f, :user_id, ["Dillon": 1, "Harris": 2], class: "form-control" %>
+    <%= select f, :user_id, collection_of_users(), selected: @current_user.id, class: "form-control" %>
     <%= error_tag f, :user_id %>
   </div>
 
