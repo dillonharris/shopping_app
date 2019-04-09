@@ -3,10 +3,12 @@ defmodule ShoppingAppWeb.ListController do
 
   alias ShoppingApp.Shopping
   alias ShoppingApp.Shopping.List
+  alias ShoppingApp.Repo
 
   def index(conn, _params) do
     lists = Shopping.list_lists()
     current_user = Guardian.Plug.current_resource(conn)
+
     render(conn, "index.html", lists: lists, current_user: current_user)
   end
 
@@ -31,7 +33,10 @@ defmodule ShoppingAppWeb.ListController do
   def show(conn, %{"id" => id}) do
     list = Shopping.get_list!(id)
     current_user = Guardian.Plug.current_resource(conn)
-    render(conn, "show.html", list: list, current_user: current_user)
+
+    list_items = Repo.preload(list, :items).items
+
+    render(conn, "show.html", list: list, current_user: current_user, list_items: list_items)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -62,5 +67,18 @@ defmodule ShoppingAppWeb.ListController do
     conn
     |> put_flash(:info, "List deleted successfully.")
     |> redirect(to: list_path(conn, :index))
+  end
+
+  def my_lists(conn, _params) do
+    lists = Shopping.list_lists()
+    current_user = Guardian.Plug.current_resource(conn)
+
+    current_user_lists = Repo.preload(current_user, [:lists, :items]).lists
+
+    render(conn, "my_lists.html",
+      lists: lists,
+      current_user: current_user,
+      current_user_lists: current_user_lists
+    )
   end
 end

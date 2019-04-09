@@ -9,5 +9,12 @@
 
 </ul>
 
+<ul>
+  <%= for item <- @list_items do %>
+    <li><%= link item.name, to: list_path(@conn, :show, item) %></li>
+  <% end %>
+</ul>
+
+
 <span><%= link "Edit", to: list_path(@conn, :edit, @list) %></span>
 <span><%= link "Back", to: list_path(@conn, :index) %></span>

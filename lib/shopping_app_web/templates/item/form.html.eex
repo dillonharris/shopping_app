@@ -31,13 +31,13 @@
 
   <div class="form-group">
     <%= label f, :list_id, class: "control-label" %>
-    <%= select f, :list_id, ["List one": 1, "List 2": 2], class: "form-control" %>
+    <%= select f, :list_id, collection_of_list(), class: "form-control" %>
     <%= error_tag f, :list_id %>
   </div>
 
    <div class="form-group">
     <%= label f, :user_id, class: "control-label" %>
-    <%= select f, :user_id, collection_of_users, value: @current_user.id, class: "form-control" %>
+    <%= select f, :user_id, collection_of_users(), value: @current_user.id, class: "form-control" %>
     <%= error_tag f, :user_id %>
   </div>
 

@@ -29,13 +29,15 @@ defmodule ShoppingAppWeb.ItemController do
 
   def show(conn, %{"id" => id}) do
     item = Shopping.get_item!(id)
-    render(conn, "show.html", item: item)
+    current_user = Guardian.Plug.current_resource(conn)
+    render(conn, "show.html", item: item, current_user: current_user)
   end
 
   def edit(conn, %{"id" => id}) do
     item = Shopping.get_item!(id)
     changeset = Shopping.change_item(item)
-    render(conn, "edit.html", item: item, changeset: changeset)
+    current_user = Guardian.Plug.current_resource(conn)
+    render(conn, "edit.html", item: item, changeset: changeset, current_user: current_user)
   end
 
   def update(conn, %{"id" => id, "item" => item_params}) do

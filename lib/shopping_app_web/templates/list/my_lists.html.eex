@@ -1,0 +1,3 @@
+<%= for list <- @current_user_lists do %>
+  <li><%= link list.name, to: list_path(@conn, :show, list) %></li>
+<% end %>

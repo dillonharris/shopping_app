@@ -33,5 +33,6 @@ defmodule ShoppingAppWeb.Router do
     resources("/lists", ListController)
     resources("/items", ItemController)
     resources("/sessions", SessionController, only: [:delete])
+    get("/lists/my_lists", ListController, :my_lists)
   end
 end
