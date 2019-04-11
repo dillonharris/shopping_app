@@ -11,7 +11,7 @@ defmodule ShoppingAppWeb.SessionController do
         conn
         |> ShoppingApp.Auth.login(user)
         |> put_flash(:info, "Welcome back!")
-        |> redirect(to: user_path(conn, :index))
+        |> redirect(to: list_path(conn, :my_lists))
 
       {:error, _reason} ->
         conn

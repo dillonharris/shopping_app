@@ -4,6 +4,6 @@ defmodule ShoppingApp.Session do
   end
 
   def logged_in?(conn) do
-    current_user(conn) != nil
+    !!current_user(conn)
   end
 end

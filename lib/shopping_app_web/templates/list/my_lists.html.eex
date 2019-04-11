@@ -1,3 +1,13 @@
-<%= for list <- @current_user_lists do %>
-  <li><%= link list.name, to: list_path(@conn, :show, list) %></li>
-<% end %>
+<div>
+  <%= for list <- @current_user_lists do %>
+    <ul>
+      <li><%= link list.name, to: list_path(@conn, :show, list) %></li>
+    </ul>
+  <% end %>
+</div>
+
+<div>
+  <span>
+    <%= link "New Shopping List", to: list_path(@conn, :new), class: "btn btn-primary" %>
+  </span>
+</div>
