@@ -4,6 +4,9 @@ defmodule ShoppingAppWeb.ListView do
   alias ShoppingApp.Accounts
   alias ShoppingApp.Repo
   alias ShoppingApp.Accounts.User
+  alias ShoppingApp.Session
+
+  import Session, only: [current_user: 1, logged_in?: 1]
 
   def set_user_name(user_id) do
     Accounts.get_user!(user_id).name

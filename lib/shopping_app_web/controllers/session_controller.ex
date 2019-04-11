@@ -2,8 +2,7 @@ defmodule ShoppingAppWeb.SessionController do
   use ShoppingAppWeb, :controller
 
   def new(conn, _) do
-    current_user = Guardian.Plug.current_resource(conn)
-    render(conn, "new.html", current_user: current_user)
+    render(conn, "new.html")
   end
 
   def create(conn, %{"session" => %{"email" => user, "password" => password}}) do

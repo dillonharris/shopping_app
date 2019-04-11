@@ -7,6 +7,10 @@ defmodule ShoppingAppWeb.ItemView do
   alias ShoppingApp.Shopping
   alias ShoppingApp.Shopping.List
 
+  alias ShoppingApp.Session
+
+  import Session, only: [current_user: 1]
+
   def number_to_rands(price) do
     Number.Currency.number_to_currency(price, unit: "R", precision: 2)
   end

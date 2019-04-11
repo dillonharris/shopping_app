@@ -15,9 +15,9 @@
     <div class="container">
       <header class="header">
         <nav role="navigation">
-          <%= if @current_user do %>
+          <%= if logged_in?(@conn) do %>
             <ul class="nav nav-pills pull-right">
-              <li><%= link "Sign Out", to: session_path(@conn, :delete, @current_user), method: :delete %></li>
+              <li><%= link "Sign Out", to: session_path(@conn, :delete, current_user(@conn)), method: :delete %></li>
             </ul>
           <% else %>
             <ul class="nav nav-pills pull-right">

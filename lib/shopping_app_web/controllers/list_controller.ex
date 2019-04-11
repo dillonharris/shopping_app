@@ -4,18 +4,19 @@ defmodule ShoppingAppWeb.ListController do
   alias ShoppingApp.Shopping
   alias ShoppingApp.Shopping.List
   alias ShoppingApp.Repo
+  alias ShoppingApp.Session
+
+  import Session, only: [current_user: 1]
 
   def index(conn, _params) do
     lists = Shopping.list_lists()
-    current_user = Guardian.Plug.current_resource(conn)
 
-    render(conn, "index.html", lists: lists, current_user: current_user)
+    render(conn, "index.html", lists: lists)
   end
 
   def new(conn, _params) do
     changeset = Shopping.change_list(%List{})
-    current_user = Guardian.Plug.current_resource(conn)
-    render(conn, "new.html", changeset: changeset, current_user: current_user)
+    render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"list" => list_params}) do
@@ -32,18 +33,15 @@ defmodule ShoppingAppWeb.ListController do
 
   def show(conn, %{"id" => id}) do
     list = Shopping.get_list!(id)
-    current_user = Guardian.Plug.current_resource(conn)
 
     list_items = Repo.preload(list, :items).items
-
-    render(conn, "show.html", list: list, current_user: current_user, list_items: list_items)
+    render(conn, "show.html", list: list, list_items: list_items)
   end
 
   def edit(conn, %{"id" => id}) do
     list = Shopping.get_list!(id)
     changeset = Shopping.change_list(list)
-    current_user = Guardian.Plug.current_resource(conn)
-    render(conn, "edit.html", list: list, changeset: changeset, current_user: current_user)
+    render(conn, "edit.html", list: list, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "list" => list_params}) do
@@ -69,15 +67,13 @@ defmodule ShoppingAppWeb.ListController do
     |> redirect(to: list_path(conn, :index))
   end
 
-  def my_lists(conn, _params) do
+  def my_lists(conn, _) do
     lists = Shopping.list_lists()
-    current_user = Guardian.Plug.current_resource(conn)
 
-    current_user_lists = Repo.preload(current_user, [:lists, :items]).lists
+    current_user_lists = Repo.preload(current_user(conn), [:lists, :items]).lists
 
     render(conn, "my_lists.html",
       lists: lists,
-      current_user: current_user,
       current_user_lists: current_user_lists
     )
   end

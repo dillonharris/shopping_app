@@ -6,8 +6,7 @@ defmodule ShoppingAppWeb.ItemController do
 
   def index(conn, _params) do
     items = Shopping.list_items()
-    current_user = Guardian.Plug.current_resource(conn)
-    render(conn, "index.html", items: items, current_user: current_user)
+    render(conn, "index.html", items: items)
   end
 
   def new(conn, _params) do
@@ -29,15 +28,13 @@ defmodule ShoppingAppWeb.ItemController do
 
   def show(conn, %{"id" => id}) do
     item = Shopping.get_item!(id)
-    current_user = Guardian.Plug.current_resource(conn)
-    render(conn, "show.html", item: item, current_user: current_user)
+    render(conn, "show.html", item: item)
   end
 
   def edit(conn, %{"id" => id}) do
     item = Shopping.get_item!(id)
     changeset = Shopping.change_item(item)
-    current_user = Guardian.Plug.current_resource(conn)
-    render(conn, "edit.html", item: item, changeset: changeset, current_user: current_user)
+    render(conn, "edit.html", item: item, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "item" => item_params}) do
