@@ -12,21 +12,17 @@
   </head>
 
   <body>
+    <script src="<%= static_path(@conn, "/js/app.js/") %>"></script>
+
     <div class="container">
       <header class="header">
-        <nav role="navigation">
-          <%= if logged_in?(@conn) do %>
-            <ul class="nav nav-pills pull-right">
-              <li><%= link "Sign Out", to: session_path(@conn, :delete, current_user(@conn)), method: :delete %></li>
-            </ul>
-          <% else %>
-            <ul class="nav nav-pills pull-right">
-              <li><%= link "Sign In", to: session_path(@conn, :new) %></li>
-              <li><%= link "Sign Up", to: registration_path(@conn, :new) %></li>
-            </ul>
-          <% end %>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+          <ul class="navbar-nav">
+            <li class="navbar-brand">
+              <%= link "Shopping App", to: "/" %>
+            </li>
+          </ul>
         </nav>
-        <a href="/"><span class="logo"></span></a>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
@@ -35,8 +31,6 @@
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
-
-    </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    </div>
   </body>
 </html>
