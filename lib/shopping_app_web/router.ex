@@ -13,18 +13,26 @@ defmodule ShoppingAppWeb.Router do
     plug(:accepts, ["json"])
   end
 
+  pipeline :auth do
+    plug(ShoppingApp.Auth.AuthAccessPipeline)
+  end
+
   scope "/", ShoppingAppWeb do
-    # Use the default browser stack
     pipe_through(:browser)
 
     get("/", PageController, :index)
-    resources("/users", UserController)
-    resources("/lists", ListController)
-    resources("/items", ItemController)
+    resources("/users", UserController, only: [:new, :create])
+    resources("/sessions", SessionController, only: [:new, :create])
+    resources("/registrations", RegistrationController, only: [:new, :create])
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", ShoppingAppWeb do
-  #   pipe_through :api
-  # end
+  scope "/", ShoppingAppWeb do
+    pipe_through([:browser, :auth])
+
+    resources("/users", UserController, only: [:index, :show, :edit, :update, :delete])
+    resources("/lists", ListController)
+    resources("/items", ItemController)
+    resources("/sessions", SessionController, only: [:delete])
+    get("/lists/user_lists/my_lists", ListController, :my_lists)
+  end
 end

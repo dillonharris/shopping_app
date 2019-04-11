@@ -1,4 +1,4 @@
-defmodule ShoppingAppWeb.UserView do
+defmodule ShoppingAppWeb.SessionView do
   use ShoppingAppWeb, :view
 
   alias ShoppingApp.Session

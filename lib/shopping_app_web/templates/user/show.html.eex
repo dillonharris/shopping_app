@@ -13,11 +13,6 @@
   </li>
 
   <li>
-    <strong>Password:</strong>
-    <%= @user.password %>
-  </li>
-
-  <li>
     <strong>Is active:</strong>
     <%= @user.is_active %>
   </li>

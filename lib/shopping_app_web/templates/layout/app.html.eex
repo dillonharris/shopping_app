@@ -15,10 +15,16 @@
     <div class="container">
       <header class="header">
         <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="/">Sign In</a></li>
-            <li><a href="/">Sign Up</a></li>
-          </ul>
+          <%= if logged_in?(@conn) do %>
+            <ul class="nav nav-pills pull-right">
+              <li><%= link "Sign Out", to: session_path(@conn, :delete, current_user(@conn)), method: :delete %></li>
+            </ul>
+          <% else %>
+            <ul class="nav nav-pills pull-right">
+              <li><%= link "Sign In", to: session_path(@conn, :new) %></li>
+              <li><%= link "Sign Up", to: registration_path(@conn, :new) %></li>
+            </ul>
+          <% end %>
         </nav>
         <a href="/"><span class="logo"></span></a>
       </header>
