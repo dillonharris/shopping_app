@@ -19,7 +19,7 @@ defmodule ShoppingAppWeb.ItemController do
       {:ok, item} ->
         conn
         |> put_flash(:info, "Item created successfully.")
-        |> redirect(to: item_path(conn, :show, item))
+        |> redirect(to: list_path(conn, :show, item.list_id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

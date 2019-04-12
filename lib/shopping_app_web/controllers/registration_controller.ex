@@ -15,8 +15,9 @@ defmodule ShoppingAppWeb.RegistrationController do
     case ShoppingApp.Registration.create(changeset, Repo) do
       {:ok, changeset} ->
         conn
+        |> ShoppingApp.Auth.login(changeset)
         |> put_flash(:info, "Your account was created")
-        |> redirect(to: "/")
+        |> redirect(to: list_path(conn, :my_lists))
 
       {:error, changeset} ->
         conn

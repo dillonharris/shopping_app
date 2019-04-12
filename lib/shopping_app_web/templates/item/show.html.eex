@@ -1,38 +1,17 @@
-<h2>Show Item</h2>
+<h2>View Item</h2>
 
-<ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @item.name %>
-  </li>
-
-  <li>
-    <strong>Repeat:</strong>
-    <%= @item.repeat %>
-  </li>
-
-  <li>
-    <strong>Price:</strong>
-    <%= @item.price %>
-  </li>
-
-  <li>
-    <strong>Item type:</strong>
-    <%= @item.item_type %>
-  </li>
-
-  <li>
-    <strong>List:</strong>
-    <%= set_list_name(@item.list_id) %>
-  </li>
-
-  <li>
-    <strong>User:</strong>
-    <%= set_user_name(@item.user_id) %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: item_path(@conn, :edit, @item) %></span>
-<span><%= link "Back", to: item_path(@conn, :index) %></span>
+<div class="card" style="width:400px">
+  <img class="card-img-top" src="/images/placeholder.gif" alt="Card image">
+  <div class="card-body">
+    <h4 class="card-title"><%= @item.name %></h4>
+    <p class="card-text">
+      <p>Repeat: <%= String.capitalize(@item.repeat) %></p>
+      <p>Price: <%= number_to_rands(@item.price) %></p>
+      <p>Item Type: <%= @item.item_type %></p>
+      <p>List Name: <%= set_list_name(@item.list_id) %></p>
+      <p>Created by: <%= set_user_name(@item.user_id) %></p>
+    </p>
+    <%= link "Edit", to: item_path(@conn, :edit, @item), class: "btn btn-primary" %>
+    <%= link "Remove", to: item_path(@conn, :delete, @item), method: :delete, class: "btn btn-danger" %>
+  </div>
+</div>

@@ -6,6 +6,7 @@
 <div class="row">
   <div class="col-lg-12">
     <%= link "My Shopping Lists", to: list_path(@conn, :my_lists) %>
+    <%= link "Log In", to: session_path(@conn, :new) %>
   </div>
 </div>
 

@@ -19,7 +19,19 @@
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
           <ul class="navbar-nav">
             <li class="navbar-brand">
-              <%= link "Shopping App", to: "/" %>
+              <%= if logged_in?(@conn) do %>
+                <%= link "Shopping App", to: list_path(@conn, :my_lists) %>
+              <% else %>
+                <%= link "Shopping App", to: "/" %>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= if logged_in?(@conn) do %>
+                <%= link "Sign Out", to: session_path(@conn, :delete, current_user(@conn)), method: :delete, class: "text-right" %>
+              <% else %>
+               <%= link "Sign In", to: session_path(@conn, :new), class: "text-right" %>
+               <%= link "Sign Up", to: registration_path(@conn, :new), class: "text-right" %>
+              <% end %>
             </li>
           </ul>
         </nav>
