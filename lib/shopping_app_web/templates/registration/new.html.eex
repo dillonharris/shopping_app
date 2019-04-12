@@ -8,6 +8,12 @@
   <% end %>
 
   <div class="form-group">
+    <label>Name</label>
+    <%= text_input f, :name, class: "form-control" %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <div class="form-group">
     <label>Email</label>
     <%= email_input f, :email, class: "form-control" %>
     <%= error_tag f, :email %>
@@ -17,6 +23,10 @@
     <label>Password</label>
     <%= password_input f, :password, class: "form-control" %>
     <%= error_tag f, :password %>
+  </div>
+
+  <div class="form-group">
+    <%= hidden_input f, :is_active, value: true, class: "form-control" %>
   </div>
 
   <div class="form-group">

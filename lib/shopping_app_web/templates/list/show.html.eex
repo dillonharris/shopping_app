@@ -1,20 +1,30 @@
-<h2>Show List</h2>
+<%= if Enum.count(@list_items) > 0 do %>
+  <h2><%= @list.name %></h2>
 
-<ul>
+  <table class="table table-dark table-striped">
+    <tr>
+      <th>Name</th>
+      <th>Repeat</th>
+      <th>Added By</th>
+      <th>Actions</th>
+    </tr>
+    <%= for item <- @list_items do %>
+    <tr>
+      <td><%= link item.name, to: item_path(@conn, :show, item) %></td>
+      <td><%= String.capitalize(item.repeat) %></td>
+      <td><%= set_user_name(item.user_id) %></td>
+      <td><%= link "Remove", to: item_path(@conn, :delete, item), method: :delete%></td>
+    </tr>
+    <% end %>
+  </table>
+<% else %>
+  <h2>No items added Yet</h2>
+  <p>Please click "Add item" link below to add an item</p>
+<% end %>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @list.name %>
-  </li>
-
-</ul>
-
-<ul>
-  <%= for item <- @list_items do %>
-    <li><%= link item.name, to: list_path(@conn, :show, item) %></li>
-  <% end %>
-</ul>
-
+<div>
+  <%= link "Add Item", to: item_path(@conn, :new, list_id: @list.id), class: "btn btn-primary" %>
+</div>
 
 <span><%= link "Edit", to: list_path(@conn, :edit, @list) %></span>
 <span><%= link "Back", to: list_path(@conn, :index) %></span>
