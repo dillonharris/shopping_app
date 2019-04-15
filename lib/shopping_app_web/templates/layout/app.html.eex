@@ -25,11 +25,14 @@
                 <%= link "Shopping App", to: "/" %>
               <% end %>
             </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <%= if logged_in?(@conn) do %>
                 <%= link "Sign Out", to: session_path(@conn, :delete, current_user(@conn)), method: :delete, class: "text-right" %>
               <% else %>
                <%= link "Sign In", to: session_path(@conn, :new), class: "text-right" %>
+               <>
                <%= link "Sign Up", to: registration_path(@conn, :new), class: "text-right" %>
               <% end %>
             </li>

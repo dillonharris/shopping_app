@@ -9,5 +9,5 @@
     <%= password_input f, :password, placeholder: "Password", class: "form-control" %>
   </div>
 
-  <%= submit "Log In", class: "btn btn-primary" %>
+  <%= submit "Sign In", class: "btn btn-primary" %>
 <% end %>
