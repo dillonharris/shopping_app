@@ -11,7 +11,7 @@ defmodule ShoppingAppWeb.Endpoint do
     at: "/",
     from: :shopping_app,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(css sass scss fonts images js favicon.ico robots.txt)
   )
 
   # Code reloading can be explicitly enabled under the
