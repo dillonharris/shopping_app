@@ -34,5 +34,6 @@ defmodule ShoppingAppWeb.Router do
     resources("/items", ItemController)
     resources("/sessions", SessionController, only: [:delete])
     get("/lists/user_lists/my_lists", ListController, :my_lists)
+    get("/lists/:id/shopping_time", ListController, :shopping_time)
   end
 end

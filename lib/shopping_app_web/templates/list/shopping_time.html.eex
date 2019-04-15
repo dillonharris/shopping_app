@@ -1,0 +1,9 @@
+<h2><%= @list.name %></h2>
+
+<ul>
+  <%= for item <- @list_items do %>
+    <li>
+      <%= link item.name, to: item_path(@conn, :delete, item), method: :delete %>
+    </li>
+  <% end %>
+</ul>

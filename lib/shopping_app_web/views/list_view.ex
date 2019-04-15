@@ -18,7 +18,7 @@ defmodule ShoppingAppWeb.ListView do
     Enum.reduce(user_collection, %{}, fn [k, v], acc -> Map.merge(acc, %{k => v}) end)
   end
 
-  def last_update_time(list) do
+  def last_update_date(list) do
     updated_at = list.updated_at
 
     date = Enum.join([updated_at.day, updated_at.month, updated_at.year], "-")

@@ -24,7 +24,9 @@
 
 <div>
   <%= link "Add Item", to: item_path(@conn, :new, list_id: @list.id), class: "btn btn-primary" %>
+  <%= link "Ready to Shop", to: list_path(@conn, :shopping_time, @list), class: "btn btn-primary" %>
 </div>
+
 
 <span><%= link "Edit", to: list_path(@conn, :edit, @list) %></span>
 <span><%= link "Back", to: list_path(@conn, :index) %></span>

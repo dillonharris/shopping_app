@@ -1,19 +1,14 @@
 <div>
   <div class="card-columns text-center">
     <%= for list <- @current_user_lists do %>
-      <span>
-        <div class="card">
-          <div class="card-header">
-            Created by: <%= set_user_name(list.user_id)%>
-          </div>
-          <div class="card-body">
-            <%= link list.name, to: list_path(@conn, :show, list) %>
-          </div>
-          <div class="card-footer">
-            Last updated: <%= last_update_time(list) %>
-          </div>
+      <div class="card">
+        <h5 class="card-header">Created by: <%= set_user_name(list.user_id)%></h5>
+        <div class="card-body">
+          <h5 class="card-title"><%= list.name %></h5>
+          <p class="card-text">Last updated: <%= last_update_date(list) %></p>
+          <%= link "View list", to: list_path(@conn, :show, list), class: "btn btn-primary" %>
         </div>
-      </span>
+      </div>
     <% end %>
   </div>
 </div>
@@ -23,3 +18,5 @@
     <%= link "New Shopping List", to: list_path(@conn, :new), class: "btn btn-primary" %>
   </span>
 </div>
+
+

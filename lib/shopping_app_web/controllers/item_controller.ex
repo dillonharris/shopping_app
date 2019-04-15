@@ -57,6 +57,6 @@ defmodule ShoppingAppWeb.ItemController do
 
     conn
     |> put_flash(:info, "Item deleted successfully.")
-    |> redirect(to: item_path(conn, :index))
+    |> redirect(to: list_path(conn, :shopping_time, item.list_id))
   end
 end

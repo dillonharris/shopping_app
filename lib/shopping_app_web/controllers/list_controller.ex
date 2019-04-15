@@ -77,4 +77,15 @@ defmodule ShoppingAppWeb.ListController do
       current_user_lists: current_user_lists
     )
   end
+
+  def shopping_time(conn, %{"id" => id}) do
+    list = Shopping.get_list!(id)
+
+    list_items = Repo.preload(list, :items).items
+
+    render(conn, "shopping_time.html",
+      list_items: list_items,
+      list: list
+    )
+  end
 end
