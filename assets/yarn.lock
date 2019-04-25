@@ -4031,7 +4031,7 @@ safe-regex@^1.1.0:
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-sass-brunch@^2.10.4:
+sass-brunch@^2.0.0:
   version "2.10.8"
   resolved "https://registry.yarnpkg.com/sass-brunch/-/sass-brunch-2.10.8.tgz#edb2257fdc4f2056417ca1ff674b9a7d717388c7"
   integrity sha512-/P5zwRNzF/XMOf5xNgJW0JOU0jsOPlEq2zPO3QxTEgCQiJQFG5H29aFa0XF4t6VdIs/yPDjfuM8NfygGS/kfJg==
