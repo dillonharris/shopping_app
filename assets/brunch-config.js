@@ -5,9 +5,9 @@ exports.config = {
       joinTo: "js/app.js"
     },
     stylesheets: {
-      joinTo: "css/app.sass",
+      joinTo: "css/app.scss",
       order: {
-        after: ["priv/static/css/app.css"]
+        after: ["priv/static/css/app.scss"]
       }
     },
     templates: {
@@ -22,7 +22,7 @@ exports.config = {
   // Phoenix paths configuration
   paths: {
     // Dependencies and current project directories to watch
-    watched: ["static", "css", "sass", "js", "vendor"],
+    watched: ["static", "scss", "sass", "js", "vendor"],
     // Where to compile files to
     public: "../priv/static"
   },
