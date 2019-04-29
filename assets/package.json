@@ -5,19 +5,31 @@
     "deploy": "brunch build --production",
     "watch": "brunch watch --stdin"
   },
+  "engines": {
+    "node": "11.10.0",
+    "npm": "3.5.2"
+  },
   "dependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-loader": "^8.0.0",
+    "babel-brunch": "^7.0.1",
+    "css-loader": "^2.1.1",
     "bootstrap": "4.0.0",
     "jquery": "3.2.1",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
     "popper.js": "^1.12.9",
-    "tether": "^1.4.5"
-  },
-  "devDependencies": {
-    "babel-brunch": "^7.0.1",
+    "tether": "^1.4.5",
     "brunch": "^2.10.17",
     "clean-css-brunch": "2.10.0",
+    "node-sass": "^4.11.0",
     "sass-brunch": "^2.0.0",
-    "uglify-js-brunch": "2.10.0"
+    "sass-loader": "^7.1.0",
+    "uglify-js-brunch": "2.10.0",
+    "webpack": "4.4.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.13.2"
   }
 }
