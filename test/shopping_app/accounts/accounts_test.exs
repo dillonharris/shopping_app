@@ -20,11 +20,18 @@ defmodule ShoppingApp.AccountsTest do
         |> Enum.into(@valid_attrs)
         |> Accounts.create_user()
 
-      user
+      user =
+        Repo.get!(
+          from(u in User,
+            preload: [:lists, :items]
+          ),
+          user.id
+        )
     end
 
     test "list_users/0 returns all users" do
       user = user_fixture()
+
       assert Accounts.list_users() == [user]
     end
 
