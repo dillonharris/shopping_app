@@ -11,7 +11,7 @@ defmodule ShoppingApp.Application do
       # Start the Ecto repository
       supervisor(ShoppingApp.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(ShoppingAppWeb.Endpoint, []),
+      supervisor(ShoppingAppWeb.Endpoint, [])
       # Start your own worker by calling: ShoppingApp.Worker.start_link(arg1, arg2, arg3)
       # worker(ShoppingApp.Worker, [arg1, arg2, arg3]),
     ]
