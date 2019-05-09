@@ -3,12 +3,17 @@ defmodule ShoppingApp.ShoppingTest do
 
   alias ShoppingApp.Shopping
 
-  describe "lists" do
-    alias ShoppingApp.Shopping.List
+  alias ShoppingApp.Repo
 
+  alias ShoppingApp.Accounts.User
+  alias ShoppingApp.Accounts
+  alias ShoppingApp.Shopping.List
+
+  describe "lists" do
     @valid_attrs %{name: "some name"}
     @update_attrs %{name: "some updated name"}
     @invalid_attrs %{name: nil}
+    @valid_user_attrs %{email: "email@example.com", is_active: true, password: "some password"}
 
     def list_fixture(attrs \\ %{}) do
       {:ok, list} =
@@ -16,21 +21,44 @@ defmodule ShoppingApp.ShoppingTest do
         |> Enum.into(@valid_attrs)
         |> Shopping.create_list()
 
-      list
+      list =
+        Repo.get!(
+          from(l in List,
+            preload: [:items]
+          ),
+          list.id
+        )
+    end
+
+    def user_fixture(attrs \\ %{}) do
+      {:ok, user} =
+        attrs
+        |> Enum.into(@valid_user_attrs)
+        |> Accounts.create_user()
+
+      user
     end
 
     test "list_lists/0 returns all lists" do
-      list = list_fixture()
+      user = user_fixture()
+
+      list = list_fixture(user_id: user.id)
       assert Shopping.list_lists() == [list]
     end
 
     test "get_list!/1 returns the list with given id" do
-      list = list_fixture()
+      user = user_fixture()
+
+      list = list_fixture(user_id: user.id)
       assert Shopping.get_list!(list.id) == list
     end
 
     test "create_list/1 with valid data creates a list" do
-      assert {:ok, %List{} = list} = Shopping.create_list(@valid_attrs)
+      user = user_fixture()
+
+      assert {:ok, %List{} = list} =
+               Shopping.create_list(Map.put(@valid_attrs, :user_id, user.id))
+
       assert list.name == "some name"
     end
 
@@ -39,26 +67,34 @@ defmodule ShoppingApp.ShoppingTest do
     end
 
     test "update_list/2 with valid data updates the list" do
-      list = list_fixture()
+      user = user_fixture()
+      list = list_fixture(user_id: user.id)
+
       assert {:ok, list} = Shopping.update_list(list, @update_attrs)
       assert %List{} = list
       assert list.name == "some updated name"
     end
 
     test "update_list/2 with invalid data returns error changeset" do
-      list = list_fixture()
+      user = user_fixture()
+      list = list_fixture(user_id: user.id)
+
       assert {:error, %Ecto.Changeset{}} = Shopping.update_list(list, @invalid_attrs)
       assert list == Shopping.get_list!(list.id)
     end
 
     test "delete_list/1 deletes the list" do
-      list = list_fixture()
+      user = user_fixture()
+      list = list_fixture(user_id: user.id)
+
       assert {:ok, %List{}} = Shopping.delete_list(list)
       assert_raise Ecto.NoResultsError, fn -> Shopping.get_list!(list.id) end
     end
 
     test "change_list/1 returns a list changeset" do
-      list = list_fixture()
+      user = user_fixture()
+      list = list_fixture(user_id: user.id)
+
       assert %Ecto.Changeset{} = Shopping.change_list(list)
     end
   end
@@ -66,8 +102,18 @@ defmodule ShoppingApp.ShoppingTest do
   describe "items" do
     alias ShoppingApp.Shopping.Item
 
-    @valid_attrs %{item_type: "some item_type", name: "some name", price: "some price", repeat: true}
-    @update_attrs %{item_type: "some updated item_type", name: "some updated name", price: "some updated price", repeat: false}
+    @valid_attrs %{
+      item_type: "some item_type",
+      name: "some name",
+      price: "some price",
+      repeat: "never"
+    }
+    @update_attrs %{
+      item_type: "some updated item_type",
+      name: "some updated name",
+      price: "some updated price",
+      repeat: ""
+    }
     @invalid_attrs %{item_type: nil, name: nil, price: nil, repeat: nil}
 
     def item_fixture(attrs \\ %{}) do
@@ -81,6 +127,7 @@ defmodule ShoppingApp.ShoppingTest do
 
     test "list_items/0 returns all items" do
       item = item_fixture()
+
       assert Shopping.list_items() == [item]
     end
 
@@ -94,7 +141,7 @@ defmodule ShoppingApp.ShoppingTest do
       assert item.item_type == "some item_type"
       assert item.name == "some name"
       assert item.price == "some price"
-      assert item.repeat == true
+      assert item.repeat == "never"
     end
 
     test "create_item/1 with invalid data returns error changeset" do
@@ -108,7 +155,7 @@ defmodule ShoppingApp.ShoppingTest do
       assert item.item_type == "some updated item_type"
       assert item.name == "some updated name"
       assert item.price == "some updated price"
-      assert item.repeat == false
+      assert item.repeat == "never"
     end
 
     test "update_item/2 with invalid data returns error changeset" do

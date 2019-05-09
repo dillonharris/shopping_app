@@ -18,7 +18,11 @@ defmodule ShoppingApp.Shopping do
 
   """
   def list_lists do
-    Repo.all(List)
+    Repo.all(
+      from(l in List,
+        preload: [:items]
+      )
+    )
   end
 
   @doc """
@@ -35,7 +39,14 @@ defmodule ShoppingApp.Shopping do
       ** (Ecto.NoResultsError)
 
   """
-  def get_list!(id), do: Repo.get!(List, id)
+  def get_list!(id) do
+    Repo.get!(
+      from(l in List,
+        preload: [:items]
+      ),
+      id
+    )
+  end
 
   @doc """
   Creates a list.
@@ -131,7 +142,9 @@ defmodule ShoppingApp.Shopping do
       ** (Ecto.NoResultsError)
 
   """
-  def get_item!(id), do: Repo.get!(Item, id)
+  def get_item!(id) do
+    Repo.get!(Item, id)
+  end
 
   @doc """
   Creates a item.

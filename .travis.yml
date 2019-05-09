@@ -1,0 +1,17 @@
+language: elixir
+
+elixir:
+  - '1.8.1'
+otp_release: '21.0'
+
+script:
+  - MIX_ENV=test mix do compile --warnings-as-errors
+  - mix test
+
+after_success:
+    - bundle exec codeclimate-test-reporter
+
+addons:
+  postgresql: "9.6"
+  code_climate:
+    repo_token: f8b8628450c37080d9e19da5598eab2f695d4ab217158fedfdbb4e6802bc6137

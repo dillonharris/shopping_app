@@ -18,7 +18,11 @@ defmodule ShoppingApp.Accounts do
 
   """
   def list_users do
-    Repo.all(User)
+    Repo.all(
+      from(u in User,
+        preload: [:lists, :items]
+      )
+    )
   end
 
   @doc """
@@ -35,7 +39,14 @@ defmodule ShoppingApp.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id)
+  def get_user!(id) do
+    Repo.get!(
+      from(u in User,
+        preload: [:lists, :items]
+      ),
+      id
+    )
+  end
 
   @doc """
   Creates a user.
