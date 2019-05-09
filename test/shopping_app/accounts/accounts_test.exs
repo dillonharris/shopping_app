@@ -20,7 +20,7 @@ defmodule ShoppingApp.AccountsTest do
         |> Enum.into(@valid_attrs)
         |> Accounts.create_user()
 
-      user =
+      _user =
         Repo.get!(
           from(u in User,
             preload: [:lists, :items]

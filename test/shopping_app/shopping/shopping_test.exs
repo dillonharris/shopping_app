@@ -5,7 +5,6 @@ defmodule ShoppingApp.ShoppingTest do
 
   alias ShoppingApp.Repo
 
-  alias ShoppingApp.Accounts.User
   alias ShoppingApp.Accounts
   alias ShoppingApp.Shopping.List
 
@@ -21,7 +20,7 @@ defmodule ShoppingApp.ShoppingTest do
         |> Enum.into(@valid_attrs)
         |> Shopping.create_list()
 
-      list =
+      _list =
         Repo.get!(
           from(l in List,
             preload: [:items]
