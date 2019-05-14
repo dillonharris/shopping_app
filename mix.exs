@@ -10,7 +10,8 @@ defmodule ShoppingApp.Mixfile do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: Coverex.Task]
     ]
   end
 
@@ -45,7 +46,8 @@ defmodule ShoppingApp.Mixfile do
       {:number, "~> 0.5.6"},
       {:guardian, "~> 1.0"},
       {:comeonin, "~> 4.0"},
-      {:bcrypt_elixir, "~> 1.0"}
+      {:bcrypt_elixir, "~> 1.0"},
+      {:coverex, "~> 1.4.10", only: :test}
     ]
   end
 
