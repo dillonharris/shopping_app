@@ -1,6 +1,6 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/259ba20a16add6829441/maintainability)](https://codeclimate.com/github/dillonharris/shopping_app/maintainability)
 
-[![Test Coverage](https://api.codeclimate.com/v1/badges/259ba20a16add6829441/test_coverage)](https://codeclimate.com/github/dillonharris/shopping_app/test_coverage)
+[![Test Coverage](https://coveralls.io/repos/github/dillonharris/shopping_app/badge.svg?branch=master)](https://coveralls.io/github/dillonharris/shopping_app?branch=master)
 
 # ShoppingApp
 

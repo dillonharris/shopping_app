@@ -11,7 +11,13 @@ defmodule ShoppingApp.Mixfile do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      test_coverage: [tool: Coverex.Task]
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -47,7 +53,7 @@ defmodule ShoppingApp.Mixfile do
       {:guardian, "~> 1.0"},
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 1.0"},
-      {:coverex, "~> 1.4.10", only: :test}
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 
