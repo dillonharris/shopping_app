@@ -6,7 +6,7 @@ otp_release: '21.0'
 
 script:
   - MIX_ENV=test mix do compile --warnings-as-errors
-  - mix test
+  - mix test --cover
 
 after_success:
     - bundle exec codeclimate-test-reporter
