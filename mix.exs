@@ -53,7 +53,8 @@ defmodule ShoppingApp.Mixfile do
       {:guardian, "~> 1.0"},
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 1.0"},
-      {:excoveralls, "~> 0.10", only: :test}
+      {:excoveralls, "~> 0.10", only: :test},
+      {:credo, "~> 1.0.4", only: [:dev, :test], runtime: false}
     ]
   end
 
