@@ -1,5 +1,3 @@
-require IEx
-
 defmodule ShoppingAppWeb.UserController do
   use ShoppingAppWeb, :controller
 
