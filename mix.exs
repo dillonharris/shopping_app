@@ -32,7 +32,7 @@ defmodule ShoppingApp.Mixfile do
   end
 
   # Specifies which paths to compile per environment.
-  defp elixirc_paths(:test), do: ["lib", "web", "test/support", "test/factories"]
+  defp elixirc_paths(:test), do: ["lib", "web", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
@@ -54,7 +54,8 @@ defmodule ShoppingApp.Mixfile do
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 1.0"},
       {:excoveralls, "~> 0.10", only: :test},
-      {:credo, "~> 1.0.4", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.0.4", only: [:dev, :test], runtime: false},
+      {:ex_machina, "~> 2.3", only: :test}
     ]
   end
 
