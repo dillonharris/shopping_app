@@ -7,6 +7,7 @@ defmodule ShoppingApp.Shopping.Item do
     field(:item_type, :string)
     field(:name, :string)
     field(:price, :string)
+    field(:quantity, :string)
     field(:repeat, :string, default: "never")
     field(:user_id, :id)
     field(:list_id, :id)
@@ -17,7 +18,7 @@ defmodule ShoppingApp.Shopping.Item do
   @doc false
   def changeset(item, attrs) do
     item
-    |> cast(attrs, [:name, :repeat, :price, :item_type, :user_id, :list_id])
+    |> cast(attrs, [:name, :repeat, :price, :item_type, :user_id, :list_id, :quantity])
     |> validate_required([:name, :repeat, :price, :item_type])
   end
 end
