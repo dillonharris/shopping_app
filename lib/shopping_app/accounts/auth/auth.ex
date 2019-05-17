@@ -5,15 +5,15 @@ defmodule ShoppingApp.Auth do
 
   import Plug.Conn
 
-  alias ShoppingApp.Auth.Guardian
   alias Comeonin.Bcrypt
   alias ShoppingApp.Accounts.User
+  alias ShoppingApp.Auth.Guardian
   alias ShoppingApp.Repo
 
   def authenticate_user(email, given_password) do
-    query = Ecto.Query.from(u in User, where: u.email == ^email)
+    query = Repo.one(Ecto.Query.from(u in User, where: u.email == ^email))
 
-    Repo.one(query)
+    query
     |> check_password(given_password)
   end
 

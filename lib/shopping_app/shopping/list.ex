@@ -1,4 +1,5 @@
 defmodule ShoppingApp.Shopping.List do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
 
